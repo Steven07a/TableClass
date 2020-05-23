@@ -150,6 +150,8 @@
     <ClCompile Include="TableClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Map-Class\MapClass\MapClass\Map.h" />
+    <ClInclude Include="..\..\..\Map-Class\MapClass\MapClass\MultiMap.h" />
     <ClInclude Include="..\..\..\vector\vector\vector\Vector.h" />
     <ClInclude Include="Record.h" />
     <ClInclude Include="Table.h" />

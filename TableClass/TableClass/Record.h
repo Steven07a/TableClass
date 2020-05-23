@@ -2,7 +2,9 @@
 #define RECORD_H_
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
+
 using namespace std;
 
 bool file_exists(const char filename[]);
@@ -10,21 +12,33 @@ bool file_exists(const char filename[]);
 void open_fileRW(fstream& f, const char filename[]) throw(char*);
 void open_fileW(fstream& f, const char filename[]);
 
+typedef Vector<string> vectorstr;
 
 class Record {
 public:
     Record() {
-        record[0] = NULL;
+        for (int i = 0; i < MAX_ROWS; i++)
+            record[i][0] = NULL;
         recno = -1;
+        _num_of_fields = 0;
     }
 
-    Record(char str[]) {
-        strcpy(record, str);
-        recno = 0;
+    Record(const vectorstr& v) {
+        for (int i = 0; i < MAX_ROWS; i++)
+            record[i][0] = NULL;
+        for (int i = 0; i < v.size(); i++) {
+
+            strcpy(record[i], v[i].c_str());
+        }
+        _num_of_fields = v.size();
     }
-    Record(string s) {
-        strcpy(record, s.c_str());
-        recno = 0;
+    vectorstr get_record() {
+        vectorstr v;
+        //cout << "get_record(): " << _num_of_fields << endl;
+        for (int i = 0; i < MAX_ROWS; i++) {
+            v.push_back(string(record[i]));
+        }
+        return v;
     }
     long write(fstream& outs);
     long read(fstream& ins, long recno);
@@ -33,9 +47,11 @@ public:
     friend ostream& operator<<(ostream& outs,
         const Record& r);
 private:
-    static const int MAX = 20;
+    static const int MAX_ROWS = 20;
+    static const int MAX_COLS = 50;
     int recno;
-    char record[MAX];
+    int _num_of_fields;
+    char record[MAX_ROWS][MAX_COLS];
 };
 long Record::write(fstream& outs) {
     //write to the end of the file.
@@ -43,7 +59,7 @@ long Record::write(fstream& outs) {
     long pos = outs.tellp();
 
     //outs.write(&record[0], sizeof(record));
-    outs.write(record, sizeof(record));
+    outs.write(&record[0][0], sizeof(record));
 
     return pos / sizeof(record);
 }
@@ -52,13 +68,15 @@ long Record::read(fstream& ins, long recno) {
     ins.seekg(pos, ios_base::beg);
 
 
-    ins.read(record, sizeof(record));
+    ins.read(&record[0][0], sizeof(record));
     return ins.gcount();
 
 }
 ostream& operator<<(ostream& outs,
     const Record& r) {
-    outs << r.record;
+    for (int i = 0; i < r._num_of_fields; i++) {
+        outs << r.record[i] << "|";
+    }
     return outs;
 }
 
@@ -109,5 +127,6 @@ void open_fileW(fstream& f, const char filename[]) {
     }
 
 }
+
 
 #endif // !RECORD_H_

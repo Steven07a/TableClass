@@ -29,5 +29,11 @@
     <ClInclude Include="..\..\..\vector\vector\vector\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Map-Class\MapClass\MapClass\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Map-Class\MapClass\MapClass\MultiMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
