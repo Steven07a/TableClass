@@ -34,7 +34,6 @@ public:
     }
     vectorstr get_record() {
         vectorstr v;
-        //cout << "get_record(): " << _num_of_fields << endl;
         for (int i = 0; i < MAX_ROWS; i++) {
             v.push_back(string(record[i]));
         }

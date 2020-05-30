@@ -147,14 +147,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TableClass.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Map-Class\MapClass\MapClass\Map.h" />
     <ClInclude Include="..\..\..\Map-Class\MapClass\MapClass\MultiMap.h" />
     <ClInclude Include="..\..\..\vector\vector\vector\Vector.h" />
+    <ClInclude Include="OUTPUT.h" />
     <ClInclude Include="Record.h" />
     <ClInclude Include="Table.h" />
+    <ClInclude Include="WORKREPORT.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
